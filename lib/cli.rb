@@ -3,12 +3,7 @@ class CLI
         puts ""
         puts "Hi, welcome to drink finder"
         puts ""
-        @ingredient = prompt_input
-        until API.fetch_drinks(@ingredient)
-            @ingredient = prompt_input
-        end 
-        drinks = Drink.find_by_ingredient(@ingredient)
-        display_drinks(drinks)
+        cyclic_search
         puts ""
         puts "Please enter a number for drink for which you would like to see details"
         puts "or type 'exit' to exit"
@@ -17,13 +12,17 @@ class CLI
         if num_input == 'list'
             display_drinks(drinks)
         elsif num_input == 'search'
-            @ingredient = prompt_input
-            until API.fetch_drinks(@ingredient)
-                @ingredient = prompt_input
-            end 
-            drinks = Drink.find_by_ingredient(@ingredient)
-            display_drinks(drinks)
+            cyclic_search
         end 
+    end 
+
+    def cyclic_search
+        @ingredient = prompt_input
+        until API.fetch_drinks(@ingredient)
+            @ingredient = prompt_input
+        end 
+        drinks = Drink.find_by_ingredient(@ingredient)
+        display_drinks(drinks)
     end 
     
     def prompt_input
