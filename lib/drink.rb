@@ -1,8 +1,11 @@
 class Drink
     @@all = []
-    attr_accessor :id, :name, :instructions, :glass, :category
+    attr_accessor :name
+    attr_reader :id
 
-    def initialize 
+    def initialize(name: nil, id: nil)
+        @name = name 
+        @id = id
         @@all << self
     end 
 
