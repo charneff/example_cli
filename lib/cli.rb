@@ -3,11 +3,27 @@ class CLI
         puts ""
         puts "Hi, welcome to drink finder"
         puts ""
-        input = prompt_input
-        until drinks = API.fetch_drinks(input)
-            input = prompt_input
+        @ingredient = prompt_input
+        until API.fetch_drinks(@ingredient)
+            @ingredient = prompt_input
         end 
+        drinks = Drink.find_by_ingredient(@ingredient)
         display_drinks(drinks)
+        puts ""
+        puts "Please enter a number for drink for which you would like to see details"
+        puts "or type 'exit' to exit"
+        puts "or type 'search' to look for a drinks with a new ingredient"
+        num_input = gets.strip.downcase
+        if num_input == 'list'
+            display_drinks(drinks)
+        elsif num_input == 'search'
+            @ingredient = prompt_input
+            until API.fetch_drinks(@ingredient)
+                @ingredient = prompt_input
+            end 
+            drinks = Drink.find_by_ingredient(@ingredient)
+            display_drinks(drinks)
+        end 
     end 
     
     def prompt_input
@@ -18,7 +34,7 @@ class CLI
     end 
 
     def display_drinks(drinks)
-        drinks.each.with_index do | d, i |
+        drinks.each.with_index(1) do | d, i |
             puts "#{i}. #{d.name}"
          end
     end 
