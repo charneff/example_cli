@@ -14,7 +14,7 @@ class CLI
         puts ""
         puts "Please enter an ingredient to see drinks that use it"
         puts ""
-        input = gets.strip.downcase
+        gets.strip.downcase
     end 
 
     def display_drinks(drinks)
