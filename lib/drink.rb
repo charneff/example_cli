@@ -1,11 +1,13 @@
 class Drink
     @@all = []
-    attr_accessor :name
-    attr_reader :id, :ingredient
+    attr_accessor :name, :category, :instructions, :ingredients, :measures, :glass
+    attr_reader :drink_id, :ingredient
 
-    def initialize(name: nil, id: nil, ingredient: nil)
+    def initialize(name: nil, drink_id: nil, ingredient: nil)
+        @measures = []
+        @ingredients = []
         @name = name 
-        @id = id
+        @drink_id = drink_id
         @ingredient = ingredient
         @@all << self
     end 

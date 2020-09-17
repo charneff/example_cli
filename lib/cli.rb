@@ -8,11 +8,14 @@ class CLI
         puts "Please enter a number for drink for which you would like to see details"
         puts "or type 'exit' to exit"
         puts "or type 'search' to look for a drinks with a new ingredient"
-        num_input = gets.strip.downcase
-        if num_input == 'list'
+        sec_input = gets.strip.downcase
+        if sec_input == 'list'
             display_drinks(drinks)
-        elsif num_input == 'search'
+        elsif sec_input == 'search'
             cyclic_search
+        elsif sec_input.to_i > 0 && sec_input.to_i <= Drink.find_by_ingredient(@ingredient).length
+            drink = Drink.find_by_ingredient(@ingredient)[sec_input.to_i - 1]
+            API.get_drink_details(drink)
         end 
     end 
 
